@@ -17,12 +17,7 @@ A daily food, macro and workout tracker for two people, with a question-answerin
 | Path | Purpose |
 |---|---|
 | `index.html` | The whole app: markup, styles and script in one file |
-| `docs/ROADMAP.md` | The 12-week LLM engineering plan and what this project covers so far |
-| `docs/DEPLOY.md` | How the app runs today and what changes if it is hosted elsewhere |
-
-## How it runs
-
-The app was built as a Claude artifact. Saving data uses the artifact database, and the macro estimator and Ask feature use the page's Claude access. Outside Claude, `index.html` still opens and works in memory only, with saving and Claude features switched off. See `docs/DEPLOY.md`.
+| `docs/ROADMAP.md` | The plan: what is done, what is next, what is going to be done |
 
 ## Data
 

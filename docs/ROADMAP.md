@@ -1,34 +1,33 @@
-# 12-week plan and project status
+# Plan
 
-The plan builds one LLM app over three months: build it, make it reliable, then ship it and show the work. This project is the app. Status is marked honestly.
+The plan: a 12-week AI engineer roadmap. This app (Fuel and Reps) is the project it is applied to. Month 1 builds one useful LLM app, month 2 makes it reliable, month 3 ships it and shows the work.
 
-## Month 1: Build one useful LLM app
+## Done
 
-| Week | Goal | Status here |
-|---|---|---|
-| 1 | Tokens and context windows, structured outputs, tool calling, connect an LLM to a backend | Partial. Structured JSON output is used by the macro estimator and by Ask my logs. No tool calling yet. There is no own backend: calls go through the page runtime. |
-| 2 | Focused use case with real data, 30 to 50 test cases | Done. Use case is answering questions about food, workout and weight logs. The Evaluate page generates up to 50 cases. Real logs are still few, so the sample diary is used for now. |
-| 3 | RAG with chunking, embeddings, vector search and metadata filters | Partial. One chunk per person per day, plus weight and target records. Person and date filters work. Ranking is BM25 keyword search. No embeddings or vector search yet. |
-| 4 | Evaluate retrieval and answer quality separately and find failures | Done. Evaluate page reports hit rate, recall and rank for retrieval, accuracy for answers, and labels each failure. Known failure: questions that need many days at once, such as which day had the most protein. |
+- **Week 1 (partly):** structured JSON output from Claude, used by the macro estimator and by Ask my logs.
+- **Week 2:** use case chosen (answering questions about food, workout and weight logs). The Evaluate page generates up to 50 test cases from the data.
+- **Week 3 (partly):** one chunk per person per day, plus weight and target records. Filters by person and date. Ranking is BM25 keyword search.
+- **Week 4:** retrieval and answer quality are scored separately. Retrieval: hit rate, recall, rank. Answers: accuracy. Each failure gets a label.
+- Known failure from Week 4: questions that compare many days, such as "which day had the most protein". Recall is about 0.3 at K=5.
 
-## Month 2: Make it reliable
+## Next up (before Week 5)
 
-| Week | Goal | Next step in this project |
-|---|---|---|
-| 5 | Test hybrid search and reranking against the baseline | Keep the BM25 numbers from Week 4 as the baseline. Add embeddings, combine with BM25, rerank, and compare on the same test cases. |
-| 6 | Add a useful tool, validate inputs, enforce permissions | Let the assistant log a food item as a tool call. Validate quantities and foods, and only allow writing to the signed-in person's own log. |
-| 7 | Handle retries, timeouts, invalid outputs, limit tool calls | Add timeouts and one retry, reject bad JSON, cap tool calls per question. |
-| 8 | Test prompt injection and unauthorized access, turn failures into regression tests | Put hostile text in a food name or note and check the assistant ignores it. Try reading the other person's log. Save each failure as a test case. |
+- [ ] Log a week of real food, workouts and weights so the tests run on real data, not the sample diary.
+- [ ] Run Evaluate on the real data and write the baseline numbers here.
+- [ ] Write a short note on why the many-day questions fail, and fix them or keep them as a known issue.
+- [ ] Commit, and push to GitHub.
 
-## Month 3: Ship it and prove your skills
+## Going to do
 
-| Week | Goal | Next step in this project |
-|---|---|---|
-| 9 | Deploy, add tracing for retrieval, model calls and tools | Move the app and a small backend to a host you control. Log each retrieval, model call and tool call. |
-| 10 | Measure quality, latency and cost, test model choices and caching | Record accuracy, time and cost per question for each model and with caching on and off. |
-| 11 | Collect user feedback, fix failures, document trade-offs | Ask the two users to flag wrong answers. Fix the top failures. Write down what was traded off. |
-| 12 | Publish a case study, update resume, practice interviews, apply | Write the case study from the Week 4 to 10 results. |
+| Week | Goal |
+|---|---|
+| 5 | Add embeddings, combine them with BM25, add reranking, and compare against the Week 4 baseline on the same test cases. |
+| 6 | Add a useful tool (log a food item by chat), validate inputs, only allow writing to the signed-in person's own log. |
+| 7 | Timeouts, one retry, reject bad JSON, cap tool calls per question. |
+| 8 | Test prompt injection and reading the other person's log. Turn each failure into a regression test. |
+| 9 | Deploy with a small backend. Trace every retrieval, model call and tool call. |
+| 10 | Measure quality, speed and cost for each model, with and without caching. |
+| 11 | Get feedback from the two users, fix the top failures, write down the trade-offs. |
+| 12 | Publish a case study, update the resume, practise interviews, apply. |
 
-## Working rule
-
-Finish one week at a time. Before moving on, commit the code and add the week's numbers to this file.
+Rule: finish one week at a time. Commit the code and add that week's numbers here before moving on.
